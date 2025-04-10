@@ -9,7 +9,7 @@ export const Authenticate = (
 ): ((req: Request, res: Response, next: NextFunction) => Promise<void>) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const authHeader = req.headers["authorization"] as string;
+      const authHeader = req.headers["authorization"];
 
       console.log(
         "👊 ~ authentication.middleware.ts:15 ~ return ~ token:",

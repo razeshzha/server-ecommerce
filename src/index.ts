@@ -64,6 +64,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   const status = error.status || "error";
   const message = error.message || "Something went wrong";
 
+  console.log(error)
   res.status(statusCode).json({
     status,
     success: false,

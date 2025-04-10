@@ -21,6 +21,8 @@ const category_model_1 = __importDefault(require("../models/category.model"));
 const pagination_utils_1 = require("../utils/pagination.utils");
 exports.create = (0, asyncHandler_util_1.asyncHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
+    console.log('create product');
+    console.log(req.body);
     const { name, price, description, category: categoryId } = req.body;
     const admin = req.user;
     // const product = await Product.create(body);
@@ -35,6 +37,7 @@ exports.create = (0, asyncHandler_util_1.asyncHandler)((req, res) => __awaiter(v
         throw new errorhandler_middleware_1.default("Cover image is required", 400);
     }
     const coverImage = files.coverImage;
+    console.log("🚀 ~ create ~ coverImage:", coverImage);
     const images = files.images;
     const category = yield category_model_1.default.findById(categoryId);
     if (!category) {

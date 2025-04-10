@@ -7,6 +7,9 @@ import Category from "../models/category.model";
 import { getPaginationData } from "../utils/pagination.utils";
 
 export const create = asyncHandler(async (req: Request, res: Response) => {
+  console.log('create product')
+  console.log(req.body)
+
   const { name, price, description, category: categoryId } = req.body;
   const admin = req.user;
 
@@ -28,6 +31,7 @@ export const create = asyncHandler(async (req: Request, res: Response) => {
   }
 
   const coverImage = files.coverImage;
+  console.log("🚀 ~ create ~ coverImage:", coverImage)
   const images = files.images;
 
   const category = await Category.findById(categoryId);
