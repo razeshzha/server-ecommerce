@@ -24,9 +24,7 @@ connectDatabase(DB_URI);
 
 // using middlewares
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://server-ecommerce-cm90.onrender.com'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: '*',
 }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
