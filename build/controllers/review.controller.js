@@ -23,7 +23,7 @@ exports.create = (0, asyncHandler_util_1.asyncHandler)((req, res) => __awaiter(v
     const user = req.user;
     const { productId, rating } = body;
     if (!productId) {
-        throw new errorhandler_middleware_1.default("userId and productId is required", 400);
+        throw new errorhandler_middleware_1.default(" productId is required", 400);
     }
     const product = yield product_model_1.default.findById(productId);
     if (!product) {
