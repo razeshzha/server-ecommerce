@@ -6,7 +6,7 @@ import User from "../models/user.model";
 
 export const Authenticate = (
   roles?: Role[]
-): ((req: Request, res: Response, next: NextFunction) => Promise<void>) => {
+): (req: Request, res: Response, next: NextFunction) => Promise<void> => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const authHeader = req.headers["authorization"];
@@ -72,6 +72,8 @@ export const Authenticate = (
       };
 
       next();
+      console.log("first")
+
     } catch (err: any) {
       // throw new CustomError(err?.message ?? "Something wend wrong", 500);\
       next(err)

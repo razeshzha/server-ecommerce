@@ -19,7 +19,7 @@ const cart_routes_1 = __importDefault(require("./routes/cart.routes"));
 const wishlist_routes_1 = __importDefault(require("./routes/wishlist.routes"));
 const order_routes_1 = __importDefault(require("./routes/order.routes"));
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 6000;
 const DB_URI = process.env.DB_URI || "";
 console.log(`Connecting to database at ${DB_URI}`);
 (0, database_config_1.connectDatabase)(DB_URI);

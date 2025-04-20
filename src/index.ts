@@ -16,7 +16,7 @@ import wishlistRoutes from './routes/wishlist.routes';
 import orderRoutes from './routes/order.routes';
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 6000;
 const DB_URI = process.env.DB_URI || "";
 
 console.log(`Connecting to database at ${DB_URI}`);

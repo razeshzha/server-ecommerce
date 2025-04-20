@@ -53,6 +53,7 @@ const Authenticate = (roles) => {
                 email: decoded.email,
             };
             next();
+            console.log("first");
         }
         catch (err) {
             // throw new CustomError(err?.message ?? "Something wend wrong", 500);\
