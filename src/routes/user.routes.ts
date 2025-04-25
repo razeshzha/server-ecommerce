@@ -11,17 +11,15 @@ import { onlyAdmin, onlyUser } from "../@types/global.types";
 
 const router = express.Router();
 
-// register user
+
 router.post("/", register);
 
-// get all users
 router.get("/", Authenticate(onlyAdmin), getAll);
 
-// update user profile
 router.put("/:id", Authenticate(onlyUser), update);
 
-// login
-router.post("/login",login);
+router.post("/login", login); 
+
 router.post("/admin/login", adminlogin);
 
 export default router;
