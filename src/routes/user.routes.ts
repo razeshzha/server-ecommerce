@@ -3,6 +3,7 @@ import {
 	register,
 	update,
 	login,
+	adminlogin,
 	getAll,
 } from "../controllers/user.controller";
 import { Authenticate } from "../middlewares/authentication.middleware";
@@ -20,6 +21,7 @@ router.get("/", Authenticate(onlyAdmin), getAll);
 router.put("/:id", Authenticate(onlyUser), update);
 
 // login
-router.post("/login", login);
+router.post("login",login);
+router.post("/admin/login", adminlogin);
 
 export default router;
