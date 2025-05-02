@@ -36,7 +36,7 @@ export const create = asyncHandler(async (req: Request, res: Response) => {
 
 	product.coverImage = {
 		path:coverImage[0]?.path,
-		public_id:coverImage[0]?.fieldname
+		public_id:coverImage[0]?.filename
 	};
 
 	if (images && images.length > 0) {
@@ -44,7 +44,7 @@ export const create = asyncHandler(async (req: Request, res: Response) => {
 			(image: any, index: number) =>{
 				return {
 					path:image.path,
-					public_id:image.fieldname
+					public_id:image.filename
 				}
 			}
 		);
@@ -93,7 +93,7 @@ export const update = asyncHandler(async (req: Request, res: Response) => {
 		await deleteFiles([product.coverImage as string]);
 		product.coverImage = {
 			path:coverImage[0].path,
-			public_id:coverImage[0].fieldname
+			public_id:coverImage[0].filename
 		};
 	}
 
@@ -109,7 +109,7 @@ export const update = asyncHandler(async (req: Request, res: Response) => {
 			(image: any, index: number) => {
 				return {
 					path:image.path,
-					public_id:image.fieldname
+					public_id:image.filename
 				}
 			}
 		);
