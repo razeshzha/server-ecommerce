@@ -12,44 +12,56 @@ const productSchema = new mongoose_1.default.Schema({
     },
     price: {
         type: Number,
-        required: [true, 'price is required'],
-        min: [0, "price should be greater than 0"]
+        required: [true, 'Price is required'],
+        min: [0, 'Price should be greater than 0'],
     },
     description: {
         type: String,
-        required: false,
-        min: [50, 'description should be at least 50 character long'],
-        trim: true
+        minlength: [50, 'Description should be at least 50 characters long'],
+        trim: true,
     },
     coverImage: {
-        type: String,
-        required: false
-    },
-    images: [{
+        public_id: {
             type: String,
-            required: false
-        }],
+            required: [true, 'Cover image public_id is required'],
+        },
+        path: {
+            type: String,
+            required: [true, 'Cover image path is required'],
+        },
+    },
+    images: [
+        {
+            public_id: {
+                type: String,
+                required: [true, 'Image public_id is required'],
+            },
+            path: {
+                type: String,
+                required: [true, 'Image path is required'],
+            },
+        },
+    ],
     createdBy: {
         type: mongoose_1.default.Types.ObjectId,
         ref: 'user',
-        required: [true, 'Author is required']
+        required: [true, 'Author is required'],
     },
     category: {
         type: mongoose_1.default.Types.ObjectId,
         ref: 'category',
-        required: [true, 'Category is required']
+        required: [true, 'Category is required'],
     },
     reviews: [
         {
             type: mongoose_1.default.Types.ObjectId,
             ref: 'review',
-            required: false
-        }
+        },
     ],
     averageRating: {
         type: Number,
-        default: 0
-    }
+        default: 0,
+    },
 }, { timestamps: true });
 const Product = mongoose_1.default.model('product', productSchema);
 exports.default = Product;
