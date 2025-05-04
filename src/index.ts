@@ -5,6 +5,7 @@ import path from "path";
 import fs from "fs";
 import CustomError from "./middlewares/errorhandler.middleware";
 import cors from "cors";
+import helmet from 'helmet'; // You will need to install helmet as mentioned below
 
 // importing routes
 import userRoutes from "./routes/user.routes";
@@ -16,17 +17,27 @@ import wishlistRoutes from './routes/wishlist.routes';
 import orderRoutes from './routes/order.routes';
 
 const app = express();
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 8000;
 const DB_URI = process.env.DB_URI || "";
+
+if (!DB_URI) {
+  console.error("DB_URI environment variable is missing!");
+  process.exit(1); // Exit the application if DB_URI is not set
+}
 
 console.log(`Connecting to database at ${DB_URI}`);
 connectDatabase(DB_URI);
 
+// Use security middleware
+app.use(helmet());
+
 // using middlewares
 app.use(cors({
   origin: '*',
+  credentials: false,
 }));
-app.use(express.urlencoded({ extended: false }));
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // serving static files
@@ -72,4 +83,28 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT}`));
+// Graceful shutdown
+const server = app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});
+
+app.use((error:any, req:Request, res:Response, next: NextFunction) => {
+  const statusCode = error.statusCode || 500
+  const status = error.status || 'error'
+  const message = error.message || 'something went wrong!'
+
+  res.status(statusCode).json ({
+      status: status,
+      success: false,
+      message: message
+  })
+})
+
+
+process.on('SIGINT', () => {
+  console.log('Shutting down gracefully...');
+  server.close(() => {
+    console.log('Closed all connections');
+    process.exit(0);
+  });
+});

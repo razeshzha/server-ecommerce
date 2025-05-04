@@ -19,6 +19,7 @@ const productSchema = new mongoose_1.default.Schema({
         type: String,
         minlength: [50, 'Description should be at least 50 characters long'],
         trim: true,
+        required: false
     },
     coverImage: {
         public_id: {

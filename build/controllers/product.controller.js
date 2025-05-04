@@ -22,6 +22,7 @@ const pagination_utils_1 = require("../utils/pagination.utils");
 exports.create = (0, asyncHandler_util_1.asyncHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const { name, price, description, category: categoryId } = req.body;
+    console.log(req.body);
     const admin = req.user;
     const files = req.files;
     if (!files || !files.coverImage) {
@@ -54,11 +55,12 @@ exports.create = (0, asyncHandler_util_1.asyncHandler)((req, res) => __awaiter(v
         });
         product.images = imagePath;
     }
-    yield product.save();
+    const newProduct = yield product.save();
+    console.log(newProduct);
     res.status(201).json({
         status: "success",
         success: true,
-        data: product,
+        data: newProduct,
         message: "Product created successfully!",
     });
 }));

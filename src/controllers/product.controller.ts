@@ -8,6 +8,7 @@ import { getPaginationData } from "../utils/pagination.utils";
 
 export const create = asyncHandler(async (req: Request, res: Response) => {
 	const { name, price, description, category: categoryId } = req.body;
+	console.log(req.body)
 	const admin = req.user;
 	const files = req.files as {
 		coverImage?: Express.Multer.File[];
@@ -51,12 +52,13 @@ export const create = asyncHandler(async (req: Request, res: Response) => {
 		product.images = imagePath;
 	}
 
-	await product.save();
+	const newProduct = await product.save();
+	console.log(newProduct)
 
 	res.status(201).json({
 		status: "success",
 		success: true,
-		data: product,
+		data: newProduct,
 		message: "Product created successfully!",
 	});
 });
