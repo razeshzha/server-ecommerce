@@ -140,7 +140,7 @@ export const remove = asyncHandler(async (req: Request, res: Response) => {
 	}
 
 	if (product.images && product.images.length > 0) {
-		await deleteFiles(product.images as string[]);
+		await deleteFiles(product.images.map(Image => Image.public_id));
 	}
 
 	await Product.findByIdAndDelete(product._id);
