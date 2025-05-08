@@ -80,6 +80,7 @@ const server = app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });
 app.use((error, req, res, next) => {
+    console.log(error);
     const statusCode = error.statusCode || 500;
     const status = error.status || 'error';
     const message = error.message || 'something went wrong!';

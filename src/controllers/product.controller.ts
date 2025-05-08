@@ -53,7 +53,6 @@ export const create = asyncHandler(async (req: Request, res: Response) => {
 	}
 
 	const newProduct = await product.save();
-	console.log(newProduct)
 
 	res.status(201).json({
 		status: "success",

@@ -56,7 +56,6 @@ exports.create = (0, asyncHandler_util_1.asyncHandler)((req, res) => __awaiter(v
         product.images = imagePath;
     }
     const newProduct = yield product.save();
-    console.log(newProduct);
     res.status(201).json({
         status: "success",
         success: true,
