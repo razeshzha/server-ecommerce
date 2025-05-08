@@ -11,11 +11,7 @@ export const Authenticate = (
     try {
       const authHeader = req.headers["authorization"];
 
-      console.log(
-        "👊 ~ authentication.middleware.ts:15 ~ return ~ token:",
-        req.headers["authorization"]
-      );
-
+      
       if (!authHeader || !authHeader.startsWith("BEARER")) {
         throw new CustomError(
           "Unauthorized, Authorization header is missing",
@@ -25,20 +21,14 @@ export const Authenticate = (
 
       const access_token = authHeader.split(" ")[1];
 
-      console.log(
-        "👊 ~ authentication.middleware.ts:23 ~ return ~ access_token:",
-        access_token
-      );
+      
 
       if (!access_token) {
         throw new CustomError("Unauthorized, token is missing", 401);
       }
 
       const decoded = verifyToken(access_token);
-      console.log(
-        "👊 ~ authentication.middleware.ts:27 ~ return ~ decoded:",
-        decoded
-      );
+      
       if (decoded.exp && decoded.exp * 1000 < Date.now()) {
         throw new CustomError("Unauthorized, access denied", 401);
       }
@@ -72,7 +62,7 @@ export const Authenticate = (
       };
 
       next();
-      console.log("first")
+      
 
     } catch (err: any) {
       // throw new CustomError(err?.message ?? "Something wend wrong", 500);\
