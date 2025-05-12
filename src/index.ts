@@ -84,7 +84,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 // Graceful shutdown
-const server = app.listen(PORT, () => {
+ app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
 
@@ -97,15 +97,16 @@ app.use((error:any, req:Request, res:Response, next: NextFunction) => {
   res.status(statusCode).json ({
       status: status,
       success: false,
-      message: message
+      message: message,
+      error
   })
 })
 
 
-process.on('SIGINT', () => {
-  console.log('Shutting down gracefully...');
-  server.close(() => {
-    console.log('Closed all connections');
-    process.exit(0);
-  });
-});
+// process.on('SIGINT', () => {
+//   console.log('Shutting down gracefully...');
+//   server.close(() => {
+//     console.log('Closed all connections');
+//     process.exit(0);
+//   });
+// });
